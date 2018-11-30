@@ -293,5 +293,69 @@ namespace Book_Store.Tests.Controllers
 
 
         #endregion
+        // GET : Books/Delete/5
+        #region
+        // id is null
+        [TestMethod]
+        public void DeleteIdNull()
+        {
+            // Arrange
+            int? id = null;
+
+            // Act
+            ViewResult result = (ViewResult)controller.Delete(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.ViewName);
+        }
+
+        // book is null
+        [TestMethod]
+        public void DeleteResultNull()
+        {
+            // Act
+            ViewResult result = (ViewResult)controller.Delete(100);
+
+            // Assert
+            Assert.AreEqual("Error", result.ViewName);
+        }
+
+        // Valid Id Loads View
+        [TestMethod]
+        public void DeleteValidIdLoadsView()
+        {
+            // Arrange
+            int id = 1;
+
+            // Act
+            ViewResult result = (ViewResult)controller.Delete(id);
+
+            // Assert
+            Assert.AreEqual("Delete", result.ViewName);
+        }
+
+        // Valid Id Delete
+        [TestMethod]
+        public void DeleteValidId()
+        {
+            // Act
+            var result = (Book)((ViewResult)controller.Delete(1)).Model;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(books[0].id, result.id);
+        }
+
+        // Redirect Valid Id DeleleteConfirmed
+        [TestMethod]
+        public void DeleteConfirmedValidIdRedirect()
+        {
+            // Act
+            var result = controller.DeleteConfirmed(1);
+
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+        }
+        #endregion
     }
 }
