@@ -220,5 +220,78 @@ namespace Book_Store.Tests.Controllers
         }
 
         #endregion
+        // GET : Books/Create
+        #region
+        // Loads View
+        [TestMethod]
+        public void CreateLoadsView()
+        {
+            // Act
+            ViewResult result = (ViewResult)controller.Create();
+
+            // Assert
+            Assert.AreEqual("Create", result.ViewName);
+        }
+
+        // ViewBag Artist
+        [TestMethod]
+        public void CreateViewBagArtist()
+        {
+            // Act
+            var result = (ViewResult)controller.Create();
+
+            // Assert
+            Assert.IsNotNull(result.ViewBag.author_id);
+        }
+
+        // ViewBag Category
+        [TestMethod]
+        public void CreateViewBagCategory()
+        {
+            // Act
+            var result = (ViewResult)controller.Create();
+
+            // Assert
+            Assert.IsNotNull(result.ViewBag.category_id);
+        }
+
+        // ViewBag Publisher
+        [TestMethod]
+        public void CreateViewBagPublisher()
+        {
+            // Act
+            var result = (ViewResult)controller.Create();
+
+            // Assert
+            Assert.IsNotNull(result.ViewBag.publisher_id);
+        }
+
+        // Loads Redirect View when book is null
+        [TestMethod]
+        public void CreateLoadsRedirectView()
+        {
+            // Act
+            var result = controller.Create(null);
+
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+        }
+
+        // Loads Redirect View when book is not null
+        Book book = new Book { id = 4, ISBN = "0321683100", title = "The New York", Author = new Author { id = 2, name = "Stephen King" }, author_id = 2, Category = new Category { id = 2, name = "Art" }, category_id = 1, Publisher = new Publisher { id = 2, publish_name = "Pearson" }, publisher_id = 2, prise = new Decimal(40.99), publish_date = new DateTime(2019, 10, 10), url = "https://www.amazon.ca/gp/product/0321683100" };
+        [TestMethod]
+        public void CreateLoadsRedirectViewValidBook()
+        {
+            // Act
+            var result = controller.Create(book);
+
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+            Assert.IsNotNull(result);
+            //Assert.AreEqual(result.id, book.id);
+        }
+
+
+        #endregion
     }
 }
