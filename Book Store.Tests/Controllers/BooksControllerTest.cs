@@ -76,6 +76,7 @@ namespace Book_Store.Tests.Controllers
             CollectionAssert.AreEqual(books, result);
         }
         #endregion
+
         // GET : Books/Details/5
         #region
         // id is null
@@ -123,6 +124,7 @@ namespace Book_Store.Tests.Controllers
         }
 
         #endregion
+
         // GET : Books/Edit/5
         #region
         // id is null
@@ -220,6 +222,7 @@ namespace Book_Store.Tests.Controllers
         }
 
         #endregion
+
         // GET : Books/Create
         #region
         // Loads View
@@ -293,6 +296,7 @@ namespace Book_Store.Tests.Controllers
 
 
         #endregion
+
         // GET : Books/Delete/5
         #region
         // id is null
@@ -357,5 +361,6 @@ namespace Book_Store.Tests.Controllers
             Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
         }
         #endregion
+
     }
 }
